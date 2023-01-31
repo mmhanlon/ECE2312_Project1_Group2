@@ -1,5 +1,5 @@
-clc
-clear
+clc all
+clear 
 
 devices = audiodevinfo();
 inputID = devices.input(1);
@@ -100,6 +100,63 @@ xlabel('Time (s)'); ylabel('Frequency (Hz)');
 
 % Spectrogram for Recording 3
 [S,F,T,P] = spectrogram(data3, window, N.overlap, N.fft, fs, 'yaxis');
+figure;
+surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(jet);
+set(gca, 'clim', [-80,-20]);
+ylim([0, 8000]);
+xlabel('Time (s)'); ylabel('Frequency (Hz)');
+
+
+% Write a WAV file
+
+voice1 = 'The_quick_brown_fox_jumps_over_the_lazy_dog.wav';
+audiowrite(voice1,data1,Fs);
+clear data1 Fs1
+
+[data1,Fs1] = audioread(voice1);
+sound(data1,Fs);
+
+voice2 = 'We_promptly_judged_antique_ivory_buckles_for_the_next_prize.wav';
+audiowrite(voice2,data2,Fs);
+clear data2 Fs
+
+[data2,Fs] = audioread(voice2);
+sound(data2,Fs);
+
+voice3 = 'Crazy_Fredrick_bought_many_very_exquisite_opal_jewels.wav';
+audiowrite(voice3,data3,Fs);
+
+[data3,Fs] = audioread(voice3);
+sound(data3,Fs);
+
+
+% Spectrograms for WAV files
+
+datawav1 = getaudiodata('The_quick_brown_fox_jumps_over_the_lazy_dog.wav');
+datawav2 = getaudiodata('We_promptly_judged_antique_ivory_buckles_for_the_next_prize.wav');
+datawav3 = getaudiodata('Crazy_Fredrick_bought_many_very_exquisite_opal_jewels.wav');
+
+% Spectrogram for 'The_quick_brown_fox_jumps_over_the_lazy_dog.wav'
+window = hamming(512);
+N.overlap = 256;
+N.fft = 1024;
+[S,F,T,P] = spectrogram(datawav1, window, N.overlap, N.fft, fs, 'yaxis');
+figure;
+surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(jet);
+set(gca, 'clim', [-80,-20]);
+ylim([0, 8000]);
+xlabel('Time (s)'); ylabel('Frequency (Hz)');
+
+% Spectrogram for 'We_promptly_judged_antique_ivory_buckles_for_the_next_prize.wav'
+[S,F,T,P] = spectrogram(datawav2, window, N.overlap, N.fft, fs, 'yaxis');
+figure;
+surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(jet);
+set(gca, 'clim', [-80,-20]);
+ylim([0, 8000]);
+xlabel('Time (s)'); ylabel('Frequency (Hz)');
+
+% Spectrogram for 'Crazy_Fredrick_bought_many_very_exquisite_opal_jewels.wav'
+[S,F,T,P] = spectrogram(datawav3, window, N.overlap, N.fft, fs, 'yaxis');
 figure;
 surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(jet);
 set(gca, 'clim', [-80,-20]);
