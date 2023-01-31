@@ -1,5 +1,5 @@
-clc
-clear
+clc all
+clear 
 
 devices = audiodevinfo();
 inputID = devices.input(1);
@@ -105,3 +105,27 @@ surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(je
 set(gca, 'clim', [-80,-20]);
 ylim([0, 8000]);
 xlabel('Time (s)'); ylabel('Frequency (Hz)');
+
+
+% Write a WAV file
+
+voice1 = 'The_quick_brown_fox_jumps_over_the_lazy_dog.wav';
+audiowrite(voice1,y1,Fs1);
+clear y1 Fs1
+
+[y1,Fs1] = audioread(voice1);
+sound(y1,Fs1);
+
+voice2 = 'We_promptly_judged_antique_ivory_buckles_for_the_next_prize.wav';
+audiowrite(voice2,y2,Fs2);
+clear y2 Fs2
+
+[y2,Fs2] = audioread(voice2);
+sound(y2,Fs2);
+
+voice3 = 'Crazy_Fredrick_bought_many_very_exquisite_opal_jewels.wav';
+audiowrite(voice3,y3,Fs3);
+clear y3 Fs3
+
+[y3,Fs3] = audioread(voice3);
+sound(y3,Fs3);
