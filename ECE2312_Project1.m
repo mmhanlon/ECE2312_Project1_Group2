@@ -105,27 +105,3 @@ surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(je
 set(gca, 'clim', [-80,-20]);
 ylim([0, 8000]);
 xlabel('Time (s)'); ylabel('Frequency (Hz)');
-
-% WAV file for Recording 1
-load handel.mat
-filename = 'Recording_1.wav';
-audiowrite(filename,data1,fs);
-clear y fs
-[data1,fs] = audioread(filename);
-sound(data1,fs);
-
-% WAV file for Recording 2
-load handel.mat
-filename = 'Recording_2.wav';
-audiowrite(filename,data2,fs);
-clear y fs
-[data2,fs] = audioread(filename);
-sound(data2,fs);
-
-% WAV file for Recording 3
-load handel.mat
-filename = 'Recording_3.wav';
-audiowrite(filename,data3,fs);
-clear y fs
-[data3,fs] = audioread(filename);
-sound(data3,fs);
