@@ -165,3 +165,15 @@ set(gca, 'clim', [-80,-20]);
 ylim([0, 8000]);
 xlabel('Time (s)'); ylabel('Frequency (Hz)');
 title('WAV 3');
+
+% Stereo Speeach (Recording 1)
+data1 = getaudiodata(voice1);
+stereo_zeros = zeros(size(data1));
+stereo_signal = [data1 , stereo_zeros];
+load handel.mat
+filename = 'team2-stereosoundfile.wav';
+audiowrite(filename,stereo_signal,fs);
+clear stereo_signal fs
+[stereo_signal,fs] = audioread(filename);
+sound(stereo_signal,fs);
+pause(duration);
