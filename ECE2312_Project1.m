@@ -89,6 +89,7 @@ surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(je
 set(gca, 'clim', [-80,-20]);
 ylim([0, 8000]);
 xlabel('Time (s)'); ylabel('Frequency (Hz)');
+title('Recording 1');
 
 % Spectrogram for Recording 2
 [S,F,T,P] = spectrogram(data2, window, N.overlap, N.fft, fs, 'yaxis');
@@ -97,6 +98,7 @@ surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(je
 set(gca, 'clim', [-80,-20]);
 ylim([0, 8000]);
 xlabel('Time (s)'); ylabel('Frequency (Hz)');
+title('Recording 2');
 
 % Spectrogram for Recording 3
 [S,F,T,P] = spectrogram(data3, window, N.overlap, N.fft, fs, 'yaxis');
@@ -105,3 +107,61 @@ surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(je
 set(gca, 'clim', [-80,-20]);
 ylim([0, 8000]);
 xlabel('Time (s)'); ylabel('Frequency (Hz)');
+title('Recording 3');
+
+% WAV file for Recording 1
+load handel.mat
+filename = 'Recording_1.wav';
+audiowrite(filename,data1,fs);
+clear data1 fs
+[y1,fs] = audioread(filename);
+sound(y1,fs);
+pause(duration);
+
+% Spectrogram for WAV file 1
+window = hamming(512);
+N.overlap = 256;
+N.fft = 1024;
+[S,F,T,P] = spectrogram(y1,window, N.overlap, N.fft, fs, 'yaxis');
+figure;
+surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(jet);
+set(gca, 'clim', [-80,-20]);
+ylim([0, 8000]);
+xlabel('Time (s)'); ylabel('Frequency (Hz)');
+title('WAV 1');
+
+% WAV file for Recording 2
+load handel.mat
+filename = 'Recording_2.wav';
+audiowrite(filename,data2,fs);
+clear data2 fs
+[y2,fs] = audioread(filename);
+sound(y2,fs);
+pause(duration);
+
+% Spectrogram for WAV file 2
+[S,F,T,P] = spectrogram(y2,window, N.overlap, N.fft, fs, 'yaxis');
+figure;
+surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(jet);
+set(gca, 'clim', [-80,-20]);
+ylim([0, 8000]);
+xlabel('Time (s)'); ylabel('Frequency (Hz)');
+title('WAV 2');
+
+% WAV file for Recording 3
+load handel.mat
+filename = 'Recording_3.wav';
+audiowrite(filename,data3,fs);
+clear data3 fs
+[y3,fs] = audioread(filename);
+sound(y3,fs);
+pause(duration);
+
+% Spectrogram for WAV file 3
+[S,F,T,P] = spectrogram(y3,window, N.overlap, N.fft, fs, 'yaxis');
+figure;
+surf(T,F, 10*log10(P), 'edgecolor', 'none'); axis tight; view(0,90); colormap(jet);
+set(gca, 'clim', [-80,-20]);
+ylim([0, 8000]);
+xlabel('Time (s)'); ylabel('Frequency (Hz)');
+title('WAV 3');
